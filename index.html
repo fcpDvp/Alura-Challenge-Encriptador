@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Encriptador de Texto</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body><meta charset="UTF-8">
+        <h1><br><img src="imagenes/logo.png" alt="Logo Encriptador"></h1>
+        <div class="contenido">
+            <div>
+                <textarea cols="30" rows="11" name="txtmsj" id="txtmsj" class="input-texto" required placeholder="Ingrese el texto aqui"></textarea>
+                <label style="font-size: 4;" id="msjtxt1" class="lbl0">【!】Solo letras minusculas y sin acentos.</label>                            
+                <button id="btnEn" onclick="encriptar()" class="encriptar">Encriptar</button>
+                <button id="btnDes" onclick="desencriptar()" class="desencriptar">Desencriptar</button>
+            </div>
+            <div class="grupo_copiar">
+                <img id="imagf" src="imagenes/muñeco.png" style="width: 250px;"> 
+                <textarea readonly cols="30" rows="11" name="txtres" id="txtres" class="out-cripto"></textarea>
+                <label id="msjres1" class="lbl1">Ningun mensaje fue encontrado</label>
+                <label id="msjres2" class="lbl2">Ingresa el texto que desees encriptar o desencriptar</label>
+                <button id="btnCo" onclick="copiar()" class="copiar">Copiar</button>           
+                <br>
+            </div>
+        </div>
+        <footer>
+            <p class="copyright">&copy Copyright Freddy Caballero Padilla - 2022</p>
+        </footer>
+    </body>
+</html>
+
+<script>
+    var hres = "";
+    const inputtxt = document.querySelector("textarea"); 
+    var restxt = document.getElementById("txtres");
+    function encriptar(){ 
+        hres = "";
+        if (inputtxt.value.length > 0){
+            document.getElementById("imagf").style.display="none";
+            document.getElementById("msjres1").style.display="none";
+            document.getElementById("msjres2").style.display="none";
+            document.getElementById("txtres").style.display="block";
+            document.getElementById("btnCo").style.display="block";
+            for(var pos = 0; pos < inputtxt.value.length; pos++){			
+			    if(inputtxt.value[pos] === "a") {
+				    hres = hres + "ai";
+			    }
+                else{
+                    if(inputtxt.value[pos] === "e") {
+				        hres = hres + "enter";
+			        }
+                    else{
+                        if(inputtxt.value[pos] === "i") {
+				            hres = hres + "imes";
+			            }
+                        else{
+                            if(inputtxt.value[pos] === "o") {
+				                hres = hres + "ober";
+			                }
+                            else{
+                                if(inputtxt.value[pos] === "u") {
+				                    hres = hres + "ufat";
+			                    }
+                                else{
+                                    hres = hres + inputtxt.value[pos];
+                                }
+                            }
+                        }
+                    }
+                }
+		    }
+            restxt.innerHTML = hres;            
+        }
+    }
+    function desencriptar(){
+        hres = "";
+        if (inputtxt.value.length > 0){
+            document.getElementById("imagf").style.display="none";
+            document.getElementById("msjres1").style.display="none";
+            document.getElementById("msjres2").style.display="none";
+            document.getElementById("txtres").style.display="block";
+            document.getElementById("btnCo").style.display="block";
+            for(var pos = 0; pos < inputtxt.value.length; pos++){			
+			    if(inputtxt.value.substr(pos, 2) === "ai") {
+				    hres = hres + "a";
+                    pos = pos + 1;
+			    }
+                else{
+                    if(inputtxt.value.substr(pos, 5) === "enter") {
+				        hres = hres + "e";
+                        pos = pos + 4;
+			        }
+                    else{
+                        if(inputtxt.value.substr(pos, 4) === "imes") {
+				            hres = hres + "i";
+                            pos = pos + 3;
+			            }
+                        else{
+                            if(inputtxt.value.substr(pos, 4) === "ober") {
+				                hres = hres + "o";
+                                pos = pos + 3;
+			                }
+                            else{
+                                if(inputtxt.value.substr(pos, 4) === "ufat") {
+				                    hres = hres + "u";
+                                    pos = pos + 3;
+			                    }
+                                else{
+                                    hres = hres + inputtxt.value[pos];
+                                }
+                            }
+                        }
+                    }
+                }
+		    }
+            restxt.innerHTML = hres;            
+        }
+    }
+    function copiar(){
+        const origen = document.getElementById("txtmsj");
+        origen.value = hres;
+    }
+</script>
